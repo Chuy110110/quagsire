@@ -2,7 +2,13 @@ namespace Cpsc370Final;
 
 public class Dealer
 {
-    public int chooseAction(int total)
+
+    public void chooseAction()
+    {
+        
+    }
+    
+    public int hitOrStand(int total)
     {
         if (total >= 17)
         {
