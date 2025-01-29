@@ -1,6 +1,5 @@
 # Blackjack 🃏
-## CPSC-370-i25 Final Projects
-
+### CPSC-370-i25 Final Project
 ## about
 Final project submission for our Agile Development course! For this project we are creating a simulation of the card game BlackJack. 
 Here is a link to our [Trello](https://trello.com/b/0nTN9jL6/agile-final-project)
