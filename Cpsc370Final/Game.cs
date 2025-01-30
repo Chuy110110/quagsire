@@ -12,7 +12,7 @@ namespace Cpsc370Final
         public Game()
         {
             Deck = new Deck();
-            Player = new Player;
+            Player = new Player();
             GameOver = false;
             NewRound();
         }
