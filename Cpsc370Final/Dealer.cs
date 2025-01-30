@@ -22,11 +22,7 @@ public class Dealer
     {
         deck.ResetAndShuffle();
     }
-    public void GetCardValueTotal()
-    {
-        
-    }
-    
+
     public string chooseAction()
     {
         if (hitOrStand(cardValueTotal) == 0)
@@ -37,6 +33,10 @@ public class Dealer
 
         playStand();
         return "stand";
+    }
+    private void GetCardValueTotal()
+    {
+        
     }
 
     private void playHit()
@@ -49,7 +49,7 @@ public class Dealer
         return;
     }
     
-    public int hitOrStand(int total)
+    private int hitOrStand(int total)
     {
         if (total >= 17)
         {
