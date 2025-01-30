@@ -1,11 +1,44 @@
 namespace Cpsc370Final;
 
+
 public class Dealer
 {
-
-    public void chooseAction()
+    private int cardValueTotal;
+    private List<Card> dealerHand;
+    private Deck deck;
+    
+    public Dealer()
     {
-        
+        deck = new Deck();
+    }
+
+    public void shuffleDeck()
+    {
+        deck.Shuffle();
+    }
+    
+    public string chooseAction()
+    {
+        if (hitOrStand(cardValueTotal) == 0)
+        {
+            playHit();
+            return "hit";
+        }
+        else
+        {
+            playStand();
+            return "stand";
+        }
+    }
+
+    private void playHit()
+    {
+        Card newCard = deck.DrawCard();
+        dealerHand.Add(newCard);
+    }
+    private void playStand()
+    {
+        return;
     }
     
     public int hitOrStand(int total)
