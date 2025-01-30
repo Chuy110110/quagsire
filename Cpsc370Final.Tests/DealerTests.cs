@@ -14,23 +14,15 @@ public class DealerTests
         Assert.Equal(expected, result);
     }
 
-    [Fact]
-    public void Dealer_choosesAction_usingHitOrStand()
+    [Theory]
+    [InlineData(0, "hit")]
+    [InlineData(1, "stand")]
+    public void Dealer_choosesAction_usingHitOrStand(int actionValue, string expected)
     {
         var sut = new Dealer();
         
         var result = sut.chooseAction();
         
-        Assert.
-    }
-
-    [Fact]
-    public void Dealer_canShuffle()
-    {
-        var sut = new Dealer();
-
-        var result = shuffleDeck();
-        
-        
+        Assert.Equal(result, expected);
     }
 }
