@@ -33,6 +33,7 @@ public class Deck
     {
         this.random = random;
         this.cards = cards;
+        ResetAndShuffle();
     }
 
     public void ResetAndShuffle()
