@@ -14,7 +14,6 @@ public class PlayerTests
     [Fact]
     public void ResetPlayerStateForGameResetsHandAndStandingStatus()
     {
-        // Arrange
         var player = new Player();
         player.AddCardToHand(new Card("Hearts", "A"));
         player.AddCardToHand(new Card("Spades", "A"));
@@ -25,5 +24,16 @@ public class PlayerTests
 
         Assert.False(player.IsStandingForCurrentRound);
         Assert.True(player.Hand.Count == 0);
+    }
+
+    [Fact]
+    public void AddCardToHandAddsCardToHand()
+    {
+        var player = new Player();
+        var expectedCard = new Card("Hearts", "A");
+        player.AddCardToHand(expectedCard);
+
+        Assert.True(player.Hand.Count == 1);
+        Assert.Equal(expectedCard, player.Hand.First());
     }
 }
