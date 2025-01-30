@@ -6,14 +6,13 @@ namespace Cpsc370Final
     public class Game
     {
         public Deck Deck { get; private set; }
-        public List<Card> PlayerHand { get; private set; }
-        public int PlayerScore { get; private set; }
+        public Player Player { get; private set; }
         public bool GameOver { get; private set; }
 
         public Game()
         {
             Deck = new Deck();
-            PlayerHand = new List<Card>();
+            Player = new Player;
             GameOver = false;
             NewRound();
         }
@@ -21,9 +20,7 @@ namespace Cpsc370Final
         public void NewRound()
         {
             Deck.ResetAndShuffle();
-            PlayerHand.Clear();
-            PlayerScore = 0;
-            GameOver = false;
+            Player.ResetPlayerStateForGame();
             DrawCard();
             DrawCard();
         }
@@ -31,30 +28,36 @@ namespace Cpsc370Final
         public void DrawCard()
         {
             Card card = Deck.DrawCard();
-            PlayerHand.Add(card);
-            PlayerScore += card.Value;
-            CheckAceAdjustment();
-            if (PlayerScore > 21)
+            Player.AddCardToHand(card);
+            if (CalculateScore() > 21)
             {
-                GameOver = true;
+                CheckAceAdjustment();
+                if (CalculateScore() > 21)
+                {
+                    GameOver = true;
+                }
             }
+        }
+
+        public int CalculateScore()
+        {
+            int score = 0;
+            foreach (var card in Player.Hand)
+            {
+                score += card.Value;
+            }
+            return score;
         }
 
         public void CheckAceAdjustment()
         {
-            if (PlayerScore > 21)
+            foreach (var card in Player.Hand)
             {
-                foreach (var card in PlayerHand)
+                if (card.Rank == "A" && card.Value == 11)
                 {
-                    if (card.Rank == "A" && card.Value == 11)
-                    {
-                        card.swapAceValue(true);
-                        PlayerScore -= 10;
-                        if (PlayerScore <= 21)
-                        {
-                            break;
-                        }
-                    }
+                    card.swapAceValue(true);
+                    if (CalculateScore() <= 21)
+                        break;
                 }
             }
         }
@@ -63,18 +66,27 @@ namespace Cpsc370Final
         {
             Console.WriteLine("Do you want to play again? (yes/no)");
             string response = Console.ReadLine().Trim().ToLower();
-            if (response == "yes")
+            while (response != "yes" && response != "no")
             {
-                NewRound();
-                return true;
+                Console.WriteLine("Invalid input. Please type 'yes' or 'no'.");
+                response = Console.ReadLine().Trim().ToLower();
             }
 
-            return false;
+            if (response == "yes")
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Thanks for playing!");
+                return false;
+            }
         }
 
         public string HitOrStand()
         {
-            while (true)
+            Console.WriteLine("Your current score: " + CalculateScore());
+            while (!Player.IsStandingForCurrentRound)
             {
                 Console.WriteLine("Do you want to hit or stand?");
                 string action = Console.ReadLine().Trim().ToLower();
@@ -83,16 +95,58 @@ namespace Cpsc370Final
                 {
                     case "hit":
                         DrawCard();
-                        return "hit";
+                        Console.WriteLine("Drawn: " + Player.Hand[^1]);
+                        if (CalculateScore() > 21) Player.MarkAsStandingForCurrentRound();
+                        break;
                     case "stand":
+                        Player.MarkAsStandingForCurrentRound();
                         GameOver = true;
-                        return "stand";
+                        break;
                     default:
                         Console.WriteLine("Invalid input, please enter 'hit' or 'stand'.");
                         continue;
                 }
             }
+
+            return Player.IsStandingForCurrentRound ? "stand" : "hit";
+        }
+
+        public void Play()
+        {
+            while (!GameOver)
+            {
+                if (!Player.IsStandingForCurrentRound)
+                {
+                    HitOrStand();
+                }
+                else
+                {
+                    Console.WriteLine("Final score: " + CalculateScore());
+                    GameOver = true;
+                }
+            }
+
+            if (CalculateScore() == 21)
+            {
+                Console.WriteLine("Blackjack! You win!");
+            }
+            else if (CalculateScore() > 21)
+            {
+                Console.WriteLine("Bust! Game over.");
+            }
+            else
+            {
+                Console.WriteLine("You stand with a score of " + CalculateScore());
+            }
+
+            if (PromptContinue())
+            {
+                NewRound();
+            }
+            else
+            {
+                Console.WriteLine("Thanks for playing!");
+            }
         }
     }
-
 }
