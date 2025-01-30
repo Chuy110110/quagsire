@@ -26,13 +26,14 @@ public class Player
 
     public void AddCardToHand(Card card)
     {
+        Hand.Add(card);
     }
 
     private void ClearHand()
     {
+        Hand.Clear();
     }
 
-    // TODO: Add more ways to work with standing state
     public void MarkAsStandingForCurrentRound()
     {
         IsStandingForCurrentRound = true;
