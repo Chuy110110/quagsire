@@ -22,10 +22,16 @@ public class Card
 public class Deck
 {
     private List<Card> cards;
-    private Random random = new Random();
+    private Random random = new();
 
     public Deck()
     {
+        ResetAndShuffle();
+    }
+
+    public Deck(Random random)
+    {
+        this.random = random;
         ResetAndShuffle();
     }
 
