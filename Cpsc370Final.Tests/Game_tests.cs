@@ -1,5 +1,21 @@
 namespace Cpsc370Final.Tests;
 
+public class MockConsoleLineRetriever : ConsoleLineRetriever
+{
+    public string[] lines;
+    public int index = 0;
+
+    public MockConsoleLineRetriever(string[] lines)
+    {
+        this.lines = lines;
+    }
+
+    public override string GetNextLine()
+    {
+        return lines[index++];
+    }
+}
+
 public class Game_tests
 {
     [Fact]
@@ -20,13 +36,17 @@ public class Game_tests
     public void Game_HitOrStand_ValidatesUserInputAndHandlesCorrectly()
     {
         // Arrange
-        var game = new Game();
+        string[] lines = ["hit", "stand"];
+        var mockConsoleLineRetriever = new MockConsoleLineRetriever(lines);
+        
+        var game = new Game(mockConsoleLineRetriever);
         game.Player.ResetPlayerStateForGame();
         game.DrawCard(); 
 
         // Mock user input for "hit" followed by "stand"
-        Console.SetIn(new System.IO.StringReader("hit\nstand\n"));
+        // Console.SetIn(new System.IO.StringReader("hit\nstand\n"));
 
+        
         // Act
         game.Play();
 

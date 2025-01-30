@@ -3,11 +3,23 @@ using System.Collections.Generic;
 
 namespace Cpsc370Final
 {
+    // Extract console line reading into separate object
+    // to stub out while testing
+    public class ConsoleLineRetriever
+    {
+        public virtual string? GetNextLine()
+        {
+            return Console.ReadLine();
+        }
+    }
+
     public class Game
     {
         public Deck Deck { get; private set; }
         public Player Player { get; private set; }
         public bool GameOver { get; private set; }
+
+        private ConsoleLineRetriever consoleLineRetriever = new ConsoleLineRetriever();
 
         public Game()
         {
@@ -17,7 +29,12 @@ namespace Cpsc370Final
             NewRound();
         }
 
-        public void NewRound()
+        public Game(ConsoleLineRetriever consoleLineRetriever)
+        {
+            this.consoleLineRetriever = consoleLineRetriever;
+        }
+
+    public void NewRound()
         {
             Deck.ResetAndShuffle();
             Player.ResetPlayerStateForGame();
@@ -65,7 +82,7 @@ namespace Cpsc370Final
         public bool PromptContinue()
         {
             Console.WriteLine("Do you want to play again? (yes/no)");
-            string response = Console.ReadLine().Trim().ToLower();
+            var response = GetNextLine()?.Trim().ToLower();
             while (response != "yes" && response != "no")
             {
                 Console.WriteLine("Invalid input. Please type 'yes' or 'no'.");
@@ -81,6 +98,11 @@ namespace Cpsc370Final
                 Console.WriteLine("Thanks for playing!");
                 return false;
             }
+        }
+
+        private string? GetNextLine()
+        {
+            return consoleLineRetriever.GetNextLine();
         }
 
         public string HitOrStand()
