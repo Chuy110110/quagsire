@@ -11,10 +11,20 @@ public class Dealer
     {
         deck = new Deck();
     }
-
-    public void shuffleDeck()
+    public Card DealCard()
     {
-        deck.Shuffle();
+        Card card = deck.DrawCard();
+        
+        return card;
+    }
+
+    public void ShuffleDeck()
+    {
+        deck.ResetAndShuffle();
+    }
+    public void GetCardValueTotal()
+    {
+        
     }
     
     public string chooseAction()
