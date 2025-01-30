@@ -38,7 +38,7 @@ public class Deck
 
     public void ResetAndShuffle()
     {
-        cards = new List<Card>();
+        cards.Clear();
         string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
         string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
 
