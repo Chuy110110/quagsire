@@ -41,8 +41,7 @@ public class Game
     }
 
 
-
-public void NewRound()
+    public void NewRound()
     {
         Deck.ResetAndShuffle();
         Player.ResetPlayerStateForGame();
@@ -71,6 +70,7 @@ public void NewRound()
         {
             score += card.Value;
         }
+
         return score;
     }
 
