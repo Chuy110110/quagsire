@@ -4,16 +4,24 @@ public class Player
 {
     private const int StartingBalance = 1000;
 
-    private int balance;
-    public List<Card> hand { get; private set; }
-    private int score;
+    public List<Card> Hand { get; private set; }
+    public int Balance;
 
-    private bool _isStandingForCurrentRound = false;
+    public bool IsStandingForCurrentRound { get; private set; }
 
     public Player()
     {
-        balance = StartingBalance;
-        hand = new List<Card>();
+        Balance = StartingBalance;
+        Hand = new List<Card>();
+
+        ResetPlayerStateForGame();
+    }
+
+    public void ResetPlayerStateForGame()
+    {
+        // Doesn't reset the balance, just the other attributes
+        Hand.Clear();
+        IsStandingForCurrentRound = false;
     }
 
     public void AddCardToHand(Card card)
@@ -24,7 +32,9 @@ public class Player
     {
     }
 
+    // TODO: Add more ways to work with standing state
     public void MarkAsStandingForCurrentRound()
     {
+        IsStandingForCurrentRound = true;
     }
 }
