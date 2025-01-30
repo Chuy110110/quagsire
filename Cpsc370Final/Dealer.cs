@@ -49,8 +49,8 @@ public class Dealer
     {
         return;
     }
-    
-    private int hitOrStand(int total)
+
+    public int hitOrStand(int total)
     {
         if (total >= 17)
         {
@@ -58,5 +58,5 @@ public class Dealer
         }
         return 0;
     }
-    
+
 }
