@@ -110,9 +110,43 @@ namespace Cpsc370Final
 
             return Player.IsStandingForCurrentRound ? "stand" : "hit";
         }
-        
-        
-        
-    }
 
+        public void Play()
+        {
+            while (!GameOver)
+            {
+                if (!Player.IsStandingForCurrentRound)
+                {
+                    HitOrStand();
+                }
+                else
+                {
+                    Console.WriteLine("Final score: " + CalculateScore());
+                    GameOver = true;
+                }
+            }
+
+            if (CalculateScore() == 21)
+            {
+                Console.WriteLine("Blackjack! You win!");
+            }
+            else if (CalculateScore() > 21)
+            {
+                Console.WriteLine("Bust! Game over.");
+            }
+            else
+            {
+                Console.WriteLine("You stand with a score of " + CalculateScore());
+            }
+
+            if (PromptContinue())
+            {
+                NewRound();
+            }
+            else
+            {
+                Console.WriteLine("Thanks for playing!");
+            }
+        }
+    }
 }
