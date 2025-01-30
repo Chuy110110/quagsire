@@ -12,7 +12,7 @@ public class Player
     public Player()
     {
         Balance = StartingBalance;
-        Hand = new List<Card>();
+        Hand = [];
 
         ResetPlayerStateForGame();
     }
