@@ -29,10 +29,10 @@ public class Deck
         ResetAndShuffle();
     }
 
-    public Deck(Random random)
+    public Deck(Random random, List<Card> cards)
     {
         this.random = random;
-        ResetAndShuffle();
+        this.cards = cards;
     }
 
     public void ResetAndShuffle()
