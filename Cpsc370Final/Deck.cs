@@ -10,6 +10,7 @@ public class Deck
 
     public Deck()
     {
+        cards = [];
         ResetAndShuffle();
     }
 
@@ -24,7 +25,7 @@ public class Deck
     {
         cards.Clear();
         string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
-        string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+        string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
 
         foreach (string suit in suits)
         {
