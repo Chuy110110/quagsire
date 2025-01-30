@@ -10,13 +10,20 @@ public class Dealer
     public Dealer()
     {
         deck = new Deck();
+        dealerHand = [];
+    }
+    public Card DealCard()
+    {
+        Card card = deck.DrawCard();
+        
+        return card;
     }
 
-    public void shuffleDeck()
+    public void ShuffleDeck()
     {
-        deck.Shuffle();
+        deck.ResetAndShuffle();
     }
-    
+
     public string chooseAction()
     {
         if (hitOrStand(cardValueTotal) == 0)
@@ -24,11 +31,13 @@ public class Dealer
             playHit();
             return "hit";
         }
-        else
-        {
-            playStand();
-            return "stand";
-        }
+
+        playStand();
+        return "stand";
+    }
+    private void GetCardValueTotal()
+    {
+        
     }
 
     private void playHit()
@@ -40,7 +49,7 @@ public class Dealer
     {
         return;
     }
-    
+
     public int hitOrStand(int total)
     {
         if (total >= 17)
@@ -49,7 +58,6 @@ public class Dealer
         }
         return 0;
     }
-
     
     public (string, string) FaceupFacedown(string card1, string card2, bool dealer_turn = false)
     {
