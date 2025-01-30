@@ -143,6 +143,7 @@ public class Game
 
     public void Play()
     {
+        // TODO: Tell player what their cards are at the start of round
         while (!GameOver)
         {
             if (!Player.IsStandingForCurrentRound)
@@ -151,6 +152,7 @@ public class Game
             }
             else
             {
+                // TODO: Write code which gives cards to dealer
                 Console.WriteLine("Final score: " + CalculateScore());
                 GameOver = true;
             }
