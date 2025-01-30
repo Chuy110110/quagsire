@@ -20,7 +20,7 @@ public class PlayerTests
 
         player.MarkAsStandingForCurrentRound();
 
-        player.ClearHand();
+        player.ResetPlayerStateForGame();
 
         Assert.False(player.IsStandingForCurrentRound);
         Assert.True(player.Hand.Count == 0);
