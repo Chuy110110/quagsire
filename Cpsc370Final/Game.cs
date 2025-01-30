@@ -23,16 +23,24 @@ namespace Cpsc370Final
 
         public Game()
         {
+            InitializeGame();
+        }
+        
+        public Game(ConsoleLineRetriever consoleLineRetriever)
+        {
+            this.consoleLineRetriever = consoleLineRetriever;
+            InitializeGame();
+        }
+
+        private void InitializeGame()
+        {
             Deck = new Deck();
             Player = new Player();
             GameOver = false;
             NewRound();
         }
 
-        public Game(ConsoleLineRetriever consoleLineRetriever)
-        {
-            this.consoleLineRetriever = consoleLineRetriever;
-        }
+        
 
     public void NewRound()
         {
@@ -86,7 +94,7 @@ namespace Cpsc370Final
             while (response != "yes" && response != "no")
             {
                 Console.WriteLine("Invalid input. Please type 'yes' or 'no'.");
-                response = Console.ReadLine().Trim().ToLower();
+                response = consoleLineRetriever.GetNextLine().Trim().ToLower();
             }
 
             if (response == "yes")
@@ -111,7 +119,7 @@ namespace Cpsc370Final
             while (!Player.IsStandingForCurrentRound)
             {
                 Console.WriteLine("Do you want to hit or stand?");
-                string action = Console.ReadLine().Trim().ToLower();
+                string action = consoleLineRetriever.GetNextLine().Trim().ToLower();
 
                 switch (action)
                 {
