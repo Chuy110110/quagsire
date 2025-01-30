@@ -26,7 +26,7 @@ public class Dealer
 
     public string chooseAction()
     {
-        if (hitOrStand(cardValueTotal) == 0)
+        if (hitOrStand(GetCardValueTotal()) == 0)
         {
             playHit();
             return "hit";
@@ -35,9 +35,14 @@ public class Dealer
         playStand();
         return "stand";
     }
-    private void GetCardValueTotal()
+    private int GetCardValueTotal()
     {
+        for (int i = 0; i < dealerHand.Count; i++)
+        {
+            cardValueTotal += dealerHand[i].Value;
+        }
         
+        return cardValueTotal;
     }
 
     private void playHit()
