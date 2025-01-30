@@ -5,6 +5,17 @@ public class Deck_tests
     [Fact]
     public void ResetAndShuffleConstructsRandomizedCardList()
     {
+        const int seed = 64;
+
+        var random = new Random(seed);
+        var cards = new List<Card>();
+
+        var deck = new Deck(random, cards);
+        deck.ResetAndShuffle();
+
+        const int numCards = 52;
+
+        Assert.Equal(numCards, cards.Count);
     }
 
     [Fact]
