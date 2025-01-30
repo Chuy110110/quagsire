@@ -10,6 +10,7 @@ public class Dealer
     public Dealer()
     {
         deck = new Deck();
+        dealerHand = [];
     }
     public Card DealCard()
     {
