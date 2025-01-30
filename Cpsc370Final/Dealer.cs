@@ -35,11 +35,9 @@ public class Dealer
             playHit();
             return "hit";
         }
-        else
-        {
-            playStand();
-            return "stand";
-        }
+
+        playStand();
+        return "stand";
     }
 
     private void playHit()
