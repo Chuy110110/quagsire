@@ -143,6 +143,27 @@ public class Game
 
     public void Play()
     {
+        // While game is running
+        // Ask the player if they want to start a round
+
+        // This is one round:
+        // Display player's first two cards
+        // While player is not standing
+            // Ask the player if they want to hit or stand
+            // If hit, then a card to the player
+            // If stand, then mark player as standing
+        // Change to dealer's turn
+            // Keep giving dealer cards until they have score >= 17
+        // Compare player hand against dealer hand
+            // If player wins, then they receive 2x their bet amount
+            // If dealer wins, then player loses their bet amount
+
+        // After the round is over
+        // Check player balance
+            // If player balance > 0, then ask to continue with current balance or to quit
+            // If player balance <= 0, then ask if they want to restart with a new balance
+            // or to quit
+
         // TODO: Tell player what their cards are at the start of round
         while (!GameOver)
         {
