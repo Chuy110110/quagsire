@@ -36,4 +36,12 @@ public class PlayerTests
         Assert.True(player.Hand.Count == 1);
         Assert.Equal(expectedCard, player.Hand.First());
     }
+
+    [Fact]
+    public void MarkAsStandingForCurrentRoundUpdatesState()
+    {
+        var player = new Player();
+        player.MarkAsStandingForCurrentRound();
+        Assert.True(player.IsStandingForCurrentRound);
+    }
 }
