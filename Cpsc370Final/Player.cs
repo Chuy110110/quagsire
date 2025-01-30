@@ -20,7 +20,7 @@ public class Player
     public void ResetPlayerStateForGame()
     {
         // Doesn't reset the balance, just the other attributes
-        Hand.Clear();
+        ClearHand();
         IsStandingForCurrentRound = false;
     }
 
@@ -28,7 +28,7 @@ public class Player
     {
     }
 
-    public void ClearHand()
+    private void ClearHand()
     {
     }
 
