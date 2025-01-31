@@ -165,40 +165,44 @@ public class Game
             // or to quit
 
         // TODO: Tell player what their cards are at the start of round
-        while (!GameOver)
+        while (true)
         {
-            if (!Player.IsStandingForCurrentRound)
+            NewRound();
+            while (!GameOver)
             {
-                HitOrStand();
+                if (!Player.IsStandingForCurrentRound)
+                {
+                    HitOrStand();
+                }
+                else
+                {
+                    // TODO: Write code which gives cards to dealer
+                    Console.WriteLine("Final score: " + CalculateScore());
+                    GameOver = true;
+                }
+            }
+
+            if (CalculateScore() == 21)
+            {
+                Console.WriteLine("Blackjack! You win!");
+            }
+            else if (CalculateScore() > 21)
+            {
+                Console.WriteLine("Bust! Game over.");
             }
             else
             {
-                // TODO: Write code which gives cards to dealer
-                Console.WriteLine("Final score: " + CalculateScore());
-                GameOver = true;
+                Console.WriteLine("You stand with a score of " + CalculateScore());
             }
-        }
 
-        if (CalculateScore() == 21)
-        {
-            Console.WriteLine("Blackjack! You win!");
-        }
-        else if (CalculateScore() > 21)
-        {
-            Console.WriteLine("Bust! Game over.");
-        }
-        else
-        {
-            Console.WriteLine("You stand with a score of " + CalculateScore());
-        }
-
-        if (PromptContinue())
-        {
-            NewRound();
-        }
-        else
-        {
-            Console.WriteLine("Thanks for playing!");
+            if (PromptContinue())
+            {
+                NewRound();
+            }
+            else
+            {
+                Console.WriteLine("Thanks for playing!");
+            }
         }
     }
 }
