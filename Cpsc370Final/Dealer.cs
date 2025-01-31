@@ -1,19 +1,48 @@
 namespace Cpsc370Final;
 
-public class Dealer
-{
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-    public void chooseAction()
+public class Hand
+{
+    private List<Card> cards;
+
+    public Hand()
     {
-        
+        cards = new List<Card>();
     }
-    
-    public int hitOrStand(int total)
+
+    public void AddCard(Card card)
     {
-        if (total >= 17)
+        cards.Add(card);
+    }
+
+    public int GetHandValue()
+    {
+        int total = cards.Sum(card => (int)card.Rank);
+        int aceCount = cards.Count(card => card.Rank == Rank.Ace);
+
+        while (total > 21 && aceCount > 0)
         {
-            return 1;
+            total -= 10; // Adjust Ace value from 11 to 1 if needed
+            aceCount--;
         }
-        return 0;
+
+        return total;
     }
+
+    public bool IsBust() => GetHandValue() > 21;
+
+    public void DisplayHand()
+    {
+        Console.WriteLine("Your hand:");
+        foreach (var card in cards)
+        {
+            Console.WriteLine($"  - {card}");
+        }
+        Console.WriteLine($"Total Value: {GetHandValue()}");
+    }
+
+    public int CardCount => cards.Count;
 }
