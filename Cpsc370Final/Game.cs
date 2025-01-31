@@ -165,7 +165,9 @@ public class Game
             // or to quit
 
         // TODO: Tell player what their cards are at the start of round
-        while (true)
+        var isPlaying = true;
+
+        while (isPlaying)
         {
             NewRound();
             while (!GameOver)
@@ -197,12 +199,13 @@ public class Game
 
             if (PromptContinue())
             {
-                NewRound();
             }
             else
             {
-                Console.WriteLine("Thanks for playing!");
+                isPlaying = false;
             }
         }
+
+        Console.WriteLine("Thanks for playing!");
     }
 }
