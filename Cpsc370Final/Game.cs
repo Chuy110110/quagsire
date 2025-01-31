@@ -17,7 +17,7 @@ public class Game
 {
     public Deck Deck { get; private set; }
     public Player Player { get; private set; }
-    public bool GameOver { get; private set; }
+    public bool RoundOver { get; private set; }
 
     private ConsoleLineRetriever consoleLineRetriever = new ConsoleLineRetriever();
 
@@ -36,13 +36,14 @@ public class Game
     {
         Deck = new Deck();
         Player = new Player();
-        GameOver = false;
+        RoundOver = false;
         NewRound();
     }
 
 
     public void NewRound()
     {
+        RoundOver = false;
         Deck.ResetAndShuffle();
         Player.ResetPlayerStateForGame();
         DrawCard();
@@ -58,7 +59,7 @@ public class Game
             CheckAceAdjustment();
             if (CalculateScore() > 21)
             {
-                GameOver = true;
+                RoundOver = true;
             }
         }
     }
@@ -130,7 +131,7 @@ public class Game
                     break;
                 case "stand":
                     Player.MarkAsStandingForCurrentRound();
-                    GameOver = true;
+                    RoundOver = true;
                     break;
                 default:
                     Console.WriteLine("Invalid input, please enter 'hit' or 'stand'.");
@@ -170,7 +171,7 @@ public class Game
         while (isPlaying)
         {
             NewRound();
-            while (!GameOver)
+            while (!RoundOver)
             {
                 if (!Player.IsStandingForCurrentRound)
                 {
@@ -180,7 +181,7 @@ public class Game
                 {
                     // TODO: Write code which gives cards to dealer
                     Console.WriteLine("Final score: " + CalculateScore());
-                    GameOver = true;
+                    RoundOver = true;
                 }
             }
 

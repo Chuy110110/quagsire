@@ -51,7 +51,7 @@ public class Game_tests
         game.Play();
 
         // Assert
-        Assert.True(game.GameOver, "Game should be over after the player stands.");
+        Assert.True(game.RoundOver, "Game should be over after the player stands.");
     }
 
     [Fact]
